@@ -12,13 +12,13 @@
         </tr>
     </theader>
     <tbody>
-        <tr><td colspan="2"><span style="font-weight:bold;">Formato</span>: Primer trabajo en git</td></tr>        
+        <tr><td colspan="2"><span style="font-weight:bold;">Formato</span>: Trabajo de cliente servidor en docker</td></tr>        
     </tbody>
 </table>
 </div>
 
 <div align="center">
-<span style="font-weight:bold;">GUÍA DE GIT</span><br />
+<span style="font-weight:bold;">Examen parcial</span><br />
 </div>
 
 <table>
@@ -27,11 +27,11 @@
 </theader>
 <tbody>
 
-<tr><td>TÍTULO DE LA PRÁCTICA:</td>Pimer practica git<td>Git - GitHub</td></tr>
+<tr><td>TÍTULO DE LA PRÁCTICA:</td>Ejercicio de docker<td>Git - GitHub</td></tr>
 <tr><td colspan="2">RECURSOS A UTILIZAR:
 <ul>
-<li></li>
-<li></li>
+<li>Docker</li>
+<li>Python</li>
 </ul>
 </td>
 </<tr>
@@ -49,113 +49,32 @@
 
 ## OBJETIVOS
 
-- Aprender a manejar un sistema de control de versiones de manera colaborativa con varios
-usuarios
+- Demostrar lo aprendido en el curso en cuanto a hilos y a virtualización de imagenes mediante docker.
 
 ## TEMAS
-- Git
-- GitHub
+- Docker
+- Hilos (threads)
+- Python
 
 # CONTENIDO DEL TRABAJO
 
 ## MARCO CONCEPTUAL
 
-- Instalar Git en el ordenador
+Trabajo hecho en python. Tiene dos partes:
+- La primera es mostrar el proceso para subir el codigo y explicar este.
+- La segunda es mostrar capturas de docker.
 
-	- GNU/Linux
-
-	- MS Windows
-		- Descargar Git-2.36.0-64-bit.exe desde https://git-scm.com/download/win
-
-	- MacOS
-
-- git init
-    - Crea un nuevo proyecto local, se crean archivos en el directorio oculto .git
-    ```sh
-    git init
-    ```
-
-- git config
-    - Establece variables de configuración. Por ejemplo para los commits se necesita los datos del desarrollador. Se puede especificar el editor y hasta el tiempo que deseas almacenar tus credenciales en la cache y otras cosas más
-    ```sh
-    git config --global user.name "ArcZero"
-    git config --global user.email ldezac@ulasalle.edu.pe
-    git config --list
-    git config user.name
-    git config --global core.editor "code --wait"
-    git config --global credential.helper 'cache --timeout=3600'
-    ```
-
-- git status
-    - Permite verificar el estado de los archivos
-    ```sh
-    git status
-    ```
-- git add
-    - Añade archivos al staging area. El punto "." agrega todos
-    ```sh
-    git add HolaMundo.java
-    git add .
-    ```
-
-- git commit
-    - Sube los archivos al área de staging, en la máquina local. La opción -m permite escribir el mensaje en línea
-    ```sh
-    git commit -m "Probando el Hola Mundo"    
-    ```
-
-- git clone
-    - Clona un repositorio remoto como un repositorio local, en el cual se puede hacer push
-    ```sh
-    git clone https://github.com/ArcZLeo/proyecto.git
-    ```
-
-- git remote
-    - Persigue un repositorio remoto para hacer push.
-    ```sh
-    git remote add origin https://github.com/ArcZLeo/proyecto.git
-    ```
-
-- git push
-    - Permite subir archivos al repositorio remoto
-    ```sh
-    git push -u origin main    
-    ```
-
-- git show
-    - Muestra detalles del commit actual
-    ```sh
-    git show
-    ```
-
--   git log
-    - Permite ver un resumen de los commit realizados
-    ```sh
-    git log
-    git log --pretty=oneline
-    git log --graph --pretty=oneline --abbrev-commit --all
-    git log --pretty=format:"%h - %an, %ar : %s"
-    git log -p -2
-    ```
-    ![image](https://user-images.githubusercontent.com/79063417/166128248-733c7308-04f1-4b7f-8af1-d351cc758100.png)
-
-    ```
-    
-
-## EJERCICIO/PROBLEMA RESUELTO 
-Primer repositorio en GitHub
-
-
+## CODIGO DE CLIENTE Y SERVIDOR
 - Crearemos un repositorio local usando git init
     ```sh
     pwd
-    /home/cumputadora/descargas/proyecto
+    	D:\LeonardoU\VIIsemestre\CDP\Parcial
     git init
     ```
 
 - Crearemos un archivo Readme.md con contenido Markup
     ```sh
-    echo "# Mi proyecto Git" > README.md
+    echo "# Readme" > README.md
     ```
 
 - Agregaremos este archivo al staging area usando git add .
@@ -174,68 +93,141 @@ Primer repositorio en GitHub
     </pre>
     ```sh
     git add README.md
+    git add cliente.py
+    git add servidor.py
     ```
 
-- Hacemos un primer commit en nuestro repositorio local 
+- Hacemos commit en nuestro repositorio local 
     ```sh
-    git commit -m "Mi primer proyecto en github"
+    git commit -m "Cliente servidor python"
     ```
 - Asociamos el repositorio local con el repositorio remoto 
     ```sh
-    git remote add origin https://github.com/ArcZLeo/proyecto.git
+    git remote add origin https://github.com/ArcZLeo/Trapecio_docker.git
     ```
 
-- Actualizamos el repositorio remoto
+- Actualizamos el repositorio remoto de forma forzosa debido a la falta de permisos de mi maquina (NOTA: Esto no es recomendable. Lo que estaba antes se borrara)
     ```sh
-    git push -u origin main
+    git push -f origin main
     ```
 
 - Ahora podemos verificar en GitHub que nuestro repositorio se actualizó con el proyecto local
-    - ![Readme.md](Readme.md.png)
 
-- Cree una clase python calculadora.py que funcione con las cuatro operaciones basicas, haga commit y súbalo al repositorio GitHub.
-   
+- Cliente: 
+
     <pre>
-    n1 = float(input("Introduce tu primer número: ") )
-n2 = float(input("Introduce tu segundo número: ") )
+  	#Variables
+	host = 'localhost'
+	port = 8050
+	#Se importa el módulo
+	import socket
 
-opcion = 0
-while True:
-    print("""
-    Dime, ¿qué quieres hacer?
-    
-    1) Sumar los dos números
-    2) Restar los dos números
-    3) Multiplicar los dos números
-    4) Cambiar los números elegidos
-    5) Apagar calculadora
-    """)
-    opcion = int(input("Elige una opción: ") )     
+	#Creación de un objeto socket (lado cliente)
+	obj = socket.socket()
 
-    if opcion == 1:
-        print(" ")
-        print("RESULTADO: La suma de",n1,"+",n2,"es igual a",n1+n2)
-    elif opcion == 2:
-        print(" ")
-        print("RESULTADO: La resta de",n1,"-",n2,"es igual a",n1-n2)
-    elif opcion == 3:
-        print(" ")
-        print("RESULTADO: El producto de",n1,"*",n2,"es igual a",n1*n2)
-    elif opcion == 4:
-        n1 = float(input("Introduce tu primer número: ") )
-        n2 = float(input("Introduce tu segundo número: ") )
-    elif opcion == 5:
-        break
-    else:
-        print("Opción incorrecta")
+	#Conexión con el servidor. Parametros: IP (puede ser del tipo 192.168.1.1 o localhost), Puerto
+	obj.connect((host, port))
+	print("Conectado al servidor")
+
+	#Creamos un bucle para retener la conexion
+	while True:
+	#Instanciamos una entrada de datos para que el cliente pueda enviar mensajes
+	    mens = input("Mensaje desde Cliente a Servidor >> ")
+	    #Con el método send, enviamos el mensaje
+	    obj.send(mens.encode('ascii'))
+	    recibido = obj.recv(1024)
+	    print(recibido)
+
+	#Cerramos la instancia del objeto servidor
+	obj.close()
+
+	#Imprimimos la palabra Adios para cuando se cierre la conexion
+	print("Conexión cerrada")
+
+	#Prueba:-x**2/((x**4)+1),2,8
     </pre>
-    ```sh    
-    python -version
-    ```
-    ```sh
-    git add calculadora.py
-    git commit -m "Primera parte"
-    git push -u origin main
-    ```
-    ![image](https://user-images.githubusercontent.com/79063417/166128767-a3b4a9e2-3a11-4b5d-8367-34824cac553c.png)
+    
+- Servidor: 
 
+  <pre>
+	#Se importa el módulo
+	import socket
+
+	from multiprocessing.pool import ThreadPool
+
+
+	def ksum(f,a,b,k):
+	  npanel = 2**(k-1)
+	  H = (b-a)
+	  sum = 0.0
+	  nsum = 2**(k-2)
+	  for j in range(nsum):
+	    xj = (( 2*(j+1)-1 )*H)/npanel
+	    sum = sum + f( a + xj )
+	    aux = (H/npanel)*sum
+	  return aux
+
+
+	#En esta funcion trasnformamos el string que nos mande el cliente en una funcion para poder trabajarla.
+	def createFunc(f):
+	  with open("D:\LeonardoU\VIIsemestre\construccion\socket\Function.py",'w') as file:
+	    file.write("def f(x):\n\treturn ("+f+")")
+
+	  from Function import f
+	  return f
+
+	#Se crea una función para resolver el problema del trapesio, para esto se hace uso de hilos e iteraciones. En este caso en especifico se 
+	#trabaja con ThreadPool el cual sirve para poder obtener el resultado de la funcióm ksum (en la cual se realiza el metodo del trapecio como tal)
+	#y a su vez para limitar los hilos que creemos para no sobrecargar la maquina.
+	def Traprecursive1(f,a,b): 
+
+	  f=createFunc(f)
+	  Iold = (f(a) + f(b))*(b - a)/2.0
+	  iter=1
+	  while (True):
+	    pool = ThreadPool(processes=1)
+	    t1= pool.apply_async(ksum, (f,a,b,iter+1))
+	    Ik = 0.5*Iold + t1.get()
+
+	    if (round(Iold,10)==round(Ik,10)):
+	      return (iter)
+	    else:
+	      Iold=Ik
+	      iter=iter+1
+
+
+	def transform(lista):
+	  texto=lista.split(",")
+	  return Traprecursive1(texto[0],int(texto[1]),int(texto[2]))
+
+	#instanciamos un objeto para trabajar con el socket
+	ser = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+	#Puerto y servidor que debe escuchar
+	ser.bind(("", 8050))
+
+	#Aceptamos conexiones entrantes con el metodo listen. Por parámetro las conexiones simutáneas.
+	ser.listen(1)
+
+	#Instanciamos un objeto cli (socket cliente) para recibir datos
+	cli, addr = ser.accept()
+
+	while True:
+
+	#Recibimos el mensaje, con el metodo recv recibimos datos. Por parametro la cantidad de bytes para recibir
+	    recibido = cli.recv(1024)
+
+	    #Si se reciben datos nos muestra la IP y el mensaje recibido
+	    print("Recibo conexion de la IP: " + str(addr[0]) + " Puerto: " + str(addr[1]))
+	    print(recibido)
+	    msg2=transform(recibido.decode())
+
+	    #Devolvemos el mensaje al cliente
+	    msg_toSend=("Mensaje recibido, mejor cantidad de iteraciones: "+ str(msg2))
+	    cli.send(msg_toSend.encode('ascii'))
+
+	#Cerramos la instancia del socket cliente y servidor
+	cli.close()
+  </pre>
+
+## CAPTURAS DOCKER
