@@ -231,3 +231,30 @@ Trabajo hecho en python. Tiene dos partes:
   </pre>
 
 ## CAPTURAS DOCKER
+
+- Creamos la red que usaremos a futuro con nuestras imagens para poder realizar el enlace.
+![image](https://user-images.githubusercontent.com/79063417/168498322-726a0961-3d4f-4c56-9fcd-b863b8a72eb7.png)
+
+-Creamos las imagens en el docker.
+ ```sh
+ docker -it name
+ ```
+ 
+- Iniciamos las imagenes en la misma red.
+- Corremos el servidor y el cliente.
+
+![image](https://user-images.githubusercontent.com/79063417/168501033-19bb6798-cc8b-4dbe-934d-6536712e39ab.png)
+
+![image](https://user-images.githubusercontent.com/79063417/168504561-efdb426d-56d7-4244-9172-1c95e7684de1.png)
+
+- Usamos el comando start y attach para inicializar y dejar corriendo el server y el cliente
+
+
+![image](https://user-images.githubusercontent.com/79063417/168508805-a9bc9afa-df7e-4c6d-befb-7676f40fb0a4.png)
+
+- El cliente le manda al servidor los datos para hacer la función, luego el cliente los lee y le manda como respuesta al cliente el resultado.
+![image](https://user-images.githubusercontent.com/79063417/168513656-4c420b77-fcd3-43c3-9b01-aae5c8d86ce0.png)
+
+
+
+
